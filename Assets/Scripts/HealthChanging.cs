@@ -25,7 +25,10 @@ public class HealthChanging : MonoBehaviour
         }
         else
         {
-            StopCurrentCoroutine();
+            if (_coroutine != null)
+            {
+                StopCoroutine(_coroutine);
+            }
 
             _coroutine = StartCoroutine(ChangeHealth(_slider.value + _healthChange > _slider.maxValue ? _slider.maxValue : _slider.value + _healthChange));
         }
@@ -39,19 +42,12 @@ public class HealthChanging : MonoBehaviour
         }
         else
         {
-            StopCurrentCoroutine();
+            if (_coroutine != null)
+            {
+                StopCoroutine(_coroutine);
+            }
 
             _coroutine = StartCoroutine(ChangeHealth(_slider.value - _healthChange < _slider.minValue ? _slider.minValue : _slider.value - _healthChange));
-        }
-    }
-
-    private void StopCurrentCoroutine()
-    {
-        if (_coroutine != null)
-        {
-            StopCoroutine(_coroutine);
-
-            _coroutine = null;
         }
     }
 
